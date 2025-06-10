@@ -1,21 +1,31 @@
-// import { print } from "graphql/language/printer";
-// import { ContentNode, Page } from "@/gql/graphql";
-// import { fetchGraphQL } from "@/utils/fetchGraphQL";
-// import { PageQuery } from "./PageQuery";
 
-// interface TemplateProps {
-//   node: ContentNode;
-// }
+import { print } from "graphql/language/printer";
+import { ContentNode, Page } from "@/gql/graphql";
+import { fetchGraphQL } from "@/utils/fetchGraphQL";
+import { PageQuery } from "./PageQuery";
+import HomePage from "./Homepage";
+import "@/app/globals.css";
 
-// export default async function PageTemplate({ node }: TemplateProps) {
-//   const { page } = await fetchGraphQL<{ page: Page }>(print(PageQuery), {
-//     id: node.databaseId,
-//     preview: false,
+
+interface TemplateProps {
+  node: ContentNode;
+}
+
+export default async function PageTemplate({ node }: TemplateProps) {
+  const { page } = await fetchGraphQL<{ page: Page }>(print(PageQuery), {
+    id: node.databaseId,
+    preview: false,
     
-//   });
-//   console.log("node.databaseId", node.databaseId);
-//   return <div dangerouslySetInnerHTML={{ __html: page?.content || "" }} />;
-// }
+  });
+  console.log("node.databaseId", node.databaseId);
+  // Si c'est la page d'accueil, utiliser le composant HomePage
+  if (node.slug === "/" || node.databaseId === 27975 || node.databaseId === 1) {
+    console.log(node.slug);
+    // return <HomePage />
+    return <HomePage content={page?.content || ""} />
+  }
+  return <div dangerouslySetInnerHTML={{ __html: page?.content || "" }} />;
+}
 
 // VERSION 1
 // import { Page } from "@/gql/graphql";
@@ -51,60 +61,41 @@
 //   );
 // }
 
-import { Page } from "@/gql/graphql";
-import Script from "next/script";
 
-interface TemplateProps {
-  node: Page;
-}
+// 2
+// import { Page } from "@/gql/graphql";
+// import Script from "next/script";
 
-export default function PageTemplate({ node }: TemplateProps) {
-  return (
-    <>
-    <Script
-      src="https://code.jquery.com/jquery-3.6.0.min.js"
-      strategy="beforeInteractive"
-    />
-      {/* 1. Inject jQuery BEFORE everything else */}
-      <Script
-        src="https://code.jquery.com/jquery-3.6.0.min.js"
-        strategy="beforeInteractive"
-      />
+// interface TemplateProps {
+//   node: Page;
+// }
 
-      {/* 2. Inject Astra theme globals if needed */}
-      <Script
-        id="astra-global"
-        strategy="beforeInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            window.astra = window.astra || {};
-          `,
-        }}
-      />
+// export default function PageTemplate({ node }: TemplateProps) {
+//   return (
+//     <>
 
-      {/* 3. Enqueued Stylesheets */}
-      {node.enqueuedStylesheets?.nodes.map((style, i) => (
-        <link
-          key={`style-${i}`}
-          rel="stylesheet"
-          href={style?.src || ""}
-        />
-      ))}
+//       {/* 3. Enqueued Stylesheets */}
+//       {node.enqueuedStylesheets?.nodes.map((style, i) => (
+//         <link
+//           key={`style-${i}`}
+//           rel="stylesheet"
+//           href={style?.src || ""}
+//         />
+//       ))}
 
-      {/* 4. Enqueued Scripts */}
-      {node.enqueuedScripts?.nodes.map((script, i) => (
-        <Script
-          key={`script-${i}`}
-          src={script?.src || ""}
-          strategy="beforeInteractive"
-        />
-      ))}
+//       {/* 4. Enqueued Scripts */}
+//       {node.enqueuedScripts?.nodes.map((script, i) => (
+//         <Script
+//           key={`script-${i}`}
+//           src={script?.src || ""}
+//           strategy="beforeInteractive"
+//         />
+//       ))}
 
-      {/* 5. HTML Content from WordPress */}
-      <div 
-      suppressHydrationWarning={true}
-      dangerouslySetInnerHTML={{ __html: node.content || "" }} />
-    </>
-  );
-}
-
+//       {/* 5. HTML Content from WordPress */}
+//       <div 
+//       suppressHydrationWarning={true}
+//       dangerouslySetInnerHTML={{ __html: node.content || "" }} />
+//     </>
+//   );
+// }

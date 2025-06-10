@@ -19,11 +19,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const slug = await  nextSlugToWpSlug(params.slug);
   const isPreview = slug.includes("preview");
 
+  const cleanSlug = isPreview ? slug.split("preview/")[1] : slug;
+
+  if (!cleanSlug) {
+    console.warn("Missing slug for SEO query.");
+    return notFound();
+  }
+  
   const { contentNode } = await fetchGraphQL<{ contentNode: ContentNode }>(
     print(SeoQuery),
     {
-      slug: isPreview ? slug.split("preview/")[1] : slug,
+      slug: cleanSlug,
       idType: isPreview ? "DATABASE_ID" : "URI",
+      // language: locale.toUpperCase(),
     },
   );
 
@@ -40,19 +48,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
   } as Metadata;
 }
-
+// gére pas les langues ici mais laisser vide aussi si on utilise
 export function generateStaticParams() {
   return [];
 }
 
+
 export default async function Page({ params }: Props) {
   const slug = await  nextSlugToWpSlug(params.slug);
   const isPreview = slug.includes("preview");
+  // console.log(locale);
   const { contentNode } = await fetchGraphQL<{ contentNode: ContentNode }>(
     print(ContentInfoQuery),
     {
       slug: isPreview ? slug.split("preview/")[1] : slug,
       idType: isPreview ? "DATABASE_ID" : "URI",
+      // language: locale
     },
   );
 
@@ -70,3 +81,5 @@ export default async function Page({ params }: Props) {
 
 
 export const revalidate = 60; // Rafraîchit toutes les 60 secondes
+
+

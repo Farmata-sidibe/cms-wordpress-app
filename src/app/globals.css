@@ -1,115 +1,97 @@
-/* Import other styles */
-@import url('./css/custom-apple-webkit.min.css');
-@import url('./css/custom-frontend.min.css');
-@import url('./css/custom-lightbox.min.css');
-@import url('./css/customizer-controls.min-rtl.css');
-@import url('./css/customizer-controls.min.css');
-@import url('./css/editor-style.min-rtl.css');
-@import url('./css/editor-style.min.css');
-@import url('./css/extend-customizer.min-rtl.css');
-@import url('./css/extend-customizer.min.css');
-@import url('./css/frontend.min-rtl.css');
-@import url('./css/frontend.min.css');
-@import url('./css/galleries.min-rtl.css');
-@import url('./css/galleries.min.css');
-@import url('./css/main-css.min.css');
-@import url('./css/main.min-rtl.css');
-@import url('./css/main.min.css');
-@import url('./css/menu-animation-rtl.min.css');
-@import url('./css/menu-animation.min.css');
 
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap');
 
-/* Import custom widgets */
-@import url('./css/custom-widget-accordion.min.css');
-@import url('./css/custom-widget-alert.min.css');
-@import url('./css/custom-widget-contact-buttons-base.min.css');
-@import url('./css/custom-widget-contact-buttons-var-7.min.css');
-@import url('./css/custom-widget-contact-buttons-var-9.min.css');
-@import url('./css/custom-widget-contact-buttons-var-10.min.css');
-@import url('./css/custom-widget-floating-bars-base.min.css');
-@import url('./css/custom-widget-floating-bars-var-3.min.css');
-@import url('./css/custom-widget-floating-buttons.min.css');
-@import url('./css/custom-widget-icon-box.min.css');
-@import url('./css/custom-widget-icon-list.min.css');
-@import url('./css/custom-widget-image-box.min.css');
-@import url('./css/custom-widget-image-gallery.min.css');
-@import url('./css/custom-widget-link-in-bio-base.min.css');
-@import url('./css/custom-widget-link-in-bio.min.css');
-@import url('./css/custom-widget-nested-tabs.min.css');
-@import url('./css/custom-widget-progress.min.css');
-@import url('./css/custom-widget-star-rating.min.css');
-@import url('./css/custom-widget-tabs.min.css');
-@import url('./css/custom-widget-toggle.min.css');
+.follow{
+    font-family: "Rock Salt", cursive;
+}
 
-/* Import all post CSS files */
-@import url('./css/post-146.css');
-@import url('./css/post-149.css');
-@import url('./css/post-150.css');
-@import url('./css/post-152.css');
-@import url('./css/post-186.css');
-@import url('./css/post-324.css');
-@import url('./css/post-415.css');
-@import url('./css/post-529.css');
-@import url('./css/post-601.css');
-@import url('./css/post-664.css');
-@import url('./css/post-723.css');
-@import url('./css/post-1054.css');
-@import url('./css/post-1123.css');
-@import url('./css/post-1132.css');
-@import url('./css/post-1141.css');
-@import url('./css/post-1239.css');
-@import url('./css/post-1266.css');
-@import url('./css/post-1325.css');
-@import url('./css/post-1421.css');
-@import url('./css/post-5723.css');
-@import url('./css/post-5726.css');
-@import url('./css/post-5860.css');
-@import url('./css/post-6254.css');
-@import url('./css/post-6277.css');
-@import url('./css/post-6630.css');
-@import url('./css/post-6693.css');
-@import url('./css/post-6810.css');
-@import url('./css/post-7014.css');
-@import url('./css/post-7015.css');
-@import url('./css/post-8946.css');
-@import url('./css/post-10056.css');
-@import url('./css/post-10072.css');
-@import url('./css/post-10335.css');
-@import url('./css/post-10389.css');
-@import url('./css/post-10413.css');
-@import url('./css/post-10428.css');
-@import url('./css/post-10440.css');
-@import url('./css/post-10528.css');
-@import url('./css/post-11735.css');
-@import url('./css/post-11935.css');
-@import url('./css/post-11972.css');
-@import url('./css/post-12078.css');
-@import url('./css/post-12299.css');
-@import url('./css/post-12586.css');
-@import url('./css/post-12961.css');
-@import url('./css/post-13085.css');
-@import url('./css/post-14660.css');
-@import url('./css/post-17071.css');
-@import url('./css/post-17360.css');
-@import url('./css/post-17372.css');
-@import url('./css/post-17392.css');
-@import url('./css/post-17699.css');
-@import url('./css/post-21079.css');
-@import url('./css/post-21163.css');
-@import url('./css/post-21169.css');
-@import url('./css/post-21185.css');
-@import url('./css/post-21193.css');
-@import url('./css/post-21206.css');
-@import url('./css/post-21215.css');
-@import url('./css/post-21703.css');
-@import url('./css/post-22737.css');
-@import url('./css/post-22949.css');
-@import url('./css/post-23871.css');
-@import url('./css/post-24716.css');
-@import url('./css/post-24811.css');
-@import url('./css/post-24824.css');
-@import url('./css/post-25191.css');
-@import url('./css/post-25235.css');
-@import url('./css/post-25750.css');
-@import url('./css/post-26058.css');
-@import url('./css/post-26096.css');
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+@layer utilities {
+  .flip-card-zoom {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .flip-card-front {
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .flip-card-back {
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .group:hover .flip-card-front {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+
+  .group:hover .flip-card-back {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+/* Assurer que le sticky fonctionne correctement */
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+}
+
+/* Support pour les navigateurs plus anciens */
+@supports not (position: sticky) {
+  .sticky {
+    position: fixed;
+  }
+}
+
+/* Animation pour les cartes */
+.flip-card {
+  transition: transform 0.5s ease-in-out;
+}
+
+.flip-card:hover {
+  transform: scale(0.98);
+}
+
+/* Effet de zoom-out plus prononcé */
+@keyframes zoomOut {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+}
+
+@keyframes zoomIn {
+  0% {
+    transform: scale(1.1);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.zoom-out-effect {
+  animation: zoomOut 0.5s ease-in-out forwards;
+}
+
+.zoom-in-effect {
+  animation: zoomIn 0.5s ease-in-out forwards;
+}
